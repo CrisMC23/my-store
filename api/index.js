@@ -6,7 +6,7 @@ const { logErrores, errorHandler, boomerrorHandler} = require('./middlewares/err
 
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(express.json()); //middleware
 
@@ -22,12 +22,16 @@ const options = {
 }
 app.use(cors()); //middleware
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Hola mi server en express!');
 });
 
-app.get('/Nueva-ruta', (req, res) => {
+app.get('/api/Nueva-ruta', (req, res) => {
   res.send('Hola soy nueva ruta!');
+});
+
+app.get('/', (req, res) => {
+  res.send('Hola soy un servidor de express!');
 });
 
 routerApi(app); //llamamos a la funcion
